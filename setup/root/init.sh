@@ -38,8 +38,8 @@ else
 fi
 
 # set permissions inside container
-chown -R "${PUID}":"${PGID}" /usr/lib/couchpotato /usr/bin/couchpotato /home/nobody
-chmod -R 775 /usr/lib/couchpotato /usr/bin/couchpotato /home/nobody
+chown -R "${PUID}":"${PGID}" /opt/couchpotato /home/nobody
+chmod -R 775 /opt/couchpotato /home/nobody
 
 echo "[info] Starting Supervisor..."
 
