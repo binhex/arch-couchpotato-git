@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 ####
 
 # define pacman packages
-pacman_packages="git python2-pyopenssl python2-lxml"
+pacman_packages="git unrar python2-pyopenssl python2-lxml"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
