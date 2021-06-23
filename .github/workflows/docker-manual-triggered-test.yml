@@ -41,7 +41,7 @@ jobs:
         uses: peter-evans/dockerhub-description
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: ${{ github.repository }}
           short-description: ${{ github.event.repository.description }}
       - name: Show Runners environment (debug)
