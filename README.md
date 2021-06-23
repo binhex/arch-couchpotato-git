@@ -8,12 +8,12 @@ Awesome PVR for usenet and torrents. Just fill in what you want to see and Couch
 
 **Build notes**
 
-Latest GitHub master branch of CouchPotato from Arch Linux AUR,.
+Latest GitHub master branch of CouchPotato from Arch Linux AUR.
 
 **Usage**
 ```
 docker run -d \
-    -p 5050:5050 \ 
+    -p 5050:5050 \
     --name=<container name> \
     -v <path for media files>:/media \
     -v <path for data files>:/data \
@@ -34,7 +34,7 @@ Please replace all user variables in the above command defined by <> with the co
 **Example**
 ```
 docker run -d \
-    -p 5050:5050 \ 
+    -p 5050:5050 \
     --name=couchpotato \
     -v /media/movies:/media \
     -v /apps/docker/sabnzbd/watched:/data \
