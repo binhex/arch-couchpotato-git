@@ -35,7 +35,7 @@ fi
 ####
 
 # define pacman packages
-pacman_packages="git python2-pyopenssl python2-lxml"
+pacman_packages="git unrar unzip python2-pyopenssl"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -46,7 +46,7 @@ fi
 ####
 
 # define aur packages
-aur_packages="couchpotato-git"
+aur_packages="python2-lxml couchpotato-git"
 
 # call aur install script (arch user repo)
 source aur.sh
@@ -54,7 +54,7 @@ source aur.sh
 # container perms
 ####
 
-# define comma separated list of paths 
+# define comma separated list of paths
 install_paths="/opt/couchpotato,/home/nobody"
 
 # split comma separated string into list for install paths
@@ -84,7 +84,7 @@ cat <<EOF > /tmp/permissions_heredoc
 previous_puid=\$(cat "/root/puid" 2>/dev/null || true)
 previous_pgid=\$(cat "/root/pgid" 2>/dev/null || true)
 
-# if first run (no puid or pgid files in /tmp) or the PUID or PGID env vars are different 
+# if first run (no puid or pgid files in /tmp) or the PUID or PGID env vars are different
 # from the previous run then re-apply chown with current PUID and PGID values.
 if [[ ! -f "/root/puid" || ! -f "/root/pgid" || "\${previous_puid}" != "\${PUID}" || "\${previous_pgid}" != "\${PGID}" ]]; then
 
