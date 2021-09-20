@@ -1,4 +1,4 @@
-name: docker-manual-triggered-test
+name: workflow-docker-manual
 
 on:
   workflow_dispatch:
@@ -24,13 +24,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
-      - name: Sync GitHub README.md with Docker Hub
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }} # NOTE: This MUST be the password NOT the token
-          repository: ${{ github.repository }}
-          short-description: ${{ github.event.repository.description }}
       - name: Show Runners environment (debug)
         uses: nick-invision/retry@v2.4.0
         with:
@@ -50,6 +43,14 @@ jobs:
               --tag ${{ github.repository }}:${{ github.event.inputs.tags }} \
               --tag ghcr.io/${{ github.repository }}:${{ github.event.inputs.tags }} \
               .
+      - name: Run Smoke Tests
+        shell: bash
+        run: |
+          git_clone_scripts_dest="/tmp/scripts"
+          git_clone_scripts_repo="https://github.com/binhex/scripts.git"
+
+          git clone "${git_clone_scripts_repo}" "${git_clone_scripts_dest}"
+          "${git_clone_scripts_dest}/shell/arch/docker/testrunner.sh" --image-name "ghcr.io/${{ github.repository }}:${{ github.event.inputs.tags }}" --host-port '9999' --container-port '5050' --network-type 'bridge'
       - name: Push Docker image to Docker Hub
         uses: nick-invision/retry@v2.4.0
         with:
